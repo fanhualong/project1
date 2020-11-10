@@ -1,0 +1,11 @@
+package com.daishi.ssm.service;
+
+import java.util.List;
+
+import com.daishi.ssm.pojo.TeacherModel;
+
+public interface TeacherService {
+	public void updataTeacherPassword(TeacherModel teacher);
+	TeacherModel login( TeacherModel tl);
+	
+}

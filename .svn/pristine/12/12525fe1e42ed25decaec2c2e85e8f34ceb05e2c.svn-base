@@ -1,0 +1,38 @@
+package com.daishi.ssm.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+
+import com.daishi.ssm.dao.TeacherModelMapper;
+import com.daishi.ssm.pojo.TeacherModel;
+import com.daishi.ssm.service.TeacherService;
+@Service
+@Transactional
+public class TeacherServiceImpl implements TeacherService {
+	
+	@Autowired
+	private TeacherModelMapper teacherModelMapper;
+	
+	/**
+	 * 修改老师资料-密码
+	 * version=1.0
+	 */
+	@Override
+	public void updataTeacherPassword(TeacherModel teacher) {
+		teacherModelMapper.updateByPrimaryKey(teacher);
+		System.out.println("service层...");
+	}
+
+	public void addTeacher(TeacherModel model) {
+		
+		teacherModelMapper.insert(model);
+	}
+
+		@Override
+	public TeacherModel login(TeacherModel tl) {
+		TeacherModel teacher = teacherModelMapper.selectfindByName(tl);
+		return teacher;
+	}
+}

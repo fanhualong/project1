@@ -1,0 +1,23 @@
+package com.daishi.ssm.dao;
+
+import java.util.List;
+
+import com.daishi.ssm.pojo.Class_recordModel;
+
+public interface Class_recordModelMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Class_recordModel record);
+
+    int insertSelective(Class_recordModel record);
+
+    Class_recordModel selectByPrimaryKey(Integer id);
+  //全查Class_recordModel
+    List<Class_recordModel> selectAll();
+    //根据月份和年份查询 Class_recordModel
+    List<Class_recordModel> selectBycmonthAndyear(Class_recordModel crmodel);
+
+    int updateByPrimaryKeySelective(Class_recordModel record);
+
+    int updateByPrimaryKey(Class_recordModel record);
+}

@@ -1,0 +1,17 @@
+package com.daishi.ssm.dao;
+
+import com.daishi.ssm.pojo.ClassroomModel;
+
+public interface ClassroomModelMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(ClassroomModel record);
+
+    int insertSelective(ClassroomModel record);
+
+    ClassroomModel selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(ClassroomModel record);
+
+    int updateByPrimaryKey(ClassroomModel record);
+}

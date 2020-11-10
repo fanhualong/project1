@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daishi.ssm.dao.ClassroomModelMapper" >
+  <resultMap id="BaseResultMap" type="com.daishi.ssm.pojo.ClassroomModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roomName" property="roomname" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roomName, enable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_classroom
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from t_classroom
+  </select>
+  
+  <!-- 查询出数据库中的所有教室的id，和教室名称 -->
+  <select id="selectRoomAll" resultMap="BaseResultMap" parameterType="hashmap">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from t_classroom ORDER BY id limit #{currIndex} , #{m}
+  </select>
+  <!-- deleteRoom根据教室编号删除教室 -->
+  <delete id="deleteRoom" parameterType="java.lang.String">
+  	 delete from t_classroom
+    	where roomName = #{roomName,jdbcType=VARCHAR}
+  
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_classroom
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <!-- 插入教室对象 -->
+  <insert id="insert" parameterType="com.daishi.ssm.pojo.ClassroomModel" >
+  	<!-- 因为在方法中有int类型的返回值，但是在sql查询语句中没有返回值，所有要手动添加一个自增主键返回，不然就要报错 -->
+  	<selectKey keyProperty="id" resultType="int" order="AFTER">
+  		select LAST_INSERT_ID()
+  	</selectKey>
+    insert into t_classroom (roomName, enable
+      )
+    values (#{roomname,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.daishi.ssm.pojo.ClassroomModel" >
+    insert into t_classroom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomname != null" >
+        roomName,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomname != null" >
+        #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 根据教室对象id修改教室名称 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.daishi.ssm.pojo.ClassroomModel" >
+    update t_classroom
+    <set >
+      <if test="roomname != null" >
+        roomName = #{roomname,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.daishi.ssm.pojo.ClassroomModel" >
+    update t_classroom
+    set roomName = #{roomname,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

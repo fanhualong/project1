@@ -1,0 +1,17 @@
+package com.daishi.ssm.dao;
+
+import com.daishi.ssm.pojo.TimeModel;
+
+public interface TimeModelMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(TimeModel record);
+
+    int insertSelective(TimeModel record);
+
+    TimeModel selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(TimeModel record);
+
+    int updateByPrimaryKey(TimeModel record);
+}

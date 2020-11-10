@@ -1,0 +1,17 @@
+package com.daishi.ssm.dao;
+
+import com.daishi.ssm.pojo.TClassModel;
+
+public interface TClassModelMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(TClassModel record);
+
+    int insertSelective(TClassModel record);
+
+    TClassModel selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(TClassModel record);
+
+    int updateByPrimaryKey(TClassModel record);
+}

@@ -1,0 +1,19 @@
+package com.daishi.ssm.dao;
+
+import org.springframework.ui.Model;
+
+import com.daishi.ssm.pojo.TeacherModel;
+
+public interface TeacherModelMapper {
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(TeacherModel model);
+
+    int insertSelective(TeacherModel record);
+
+    TeacherModel selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(TeacherModel record);
+
+    int updateByPrimaryKey(TeacherModel record);
+}

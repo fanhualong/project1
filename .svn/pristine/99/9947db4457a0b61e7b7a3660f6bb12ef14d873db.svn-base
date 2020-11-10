@@ -1,0 +1,26 @@
+package com.daishi.ssm.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.daishi.ssm.pojo.CourseModel;
+import com.daishi.ssm.service.ICourseService;
+
+@Controller
+@RequestMapping("course")
+public class CourseController {
+	@Autowired
+	private ICourseService courseService;
+	@RequestMapping(value="/addCourse",method=RequestMethod.POST)
+	public String addCourse(CourseModel cs){
+		cs.setEnable(1);
+		cs.setCreattime(new Date());
+		System.out.println(cs.toString());
+		courseService.addCouese(cs);
+		return "";
+	}
+}

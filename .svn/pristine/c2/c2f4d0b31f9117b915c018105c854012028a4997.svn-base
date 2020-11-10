@@ -1,0 +1,581 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>教师管理-华信智原教师签课时系统</title>
+<%@include file="/include/head.jsp" %>
+
+<!--åæ¬IE9ä»¥åIE9ä»¥ä¸ç--> 
+<!--[if lte IE 9]>
+  <style>
+  	.select-wrap:after{
+    	display:none;}
+    .recordSelect-form select{
+    padding:6px 6px 6px 10px;}
+     .keshi-form select{
+    padding-right:1px;}
+  </style>
+<![endif]-->
+
+</head>
+
+<body>
+<header>
+    <div id="header-wrap">
+        <div id="header" class="header-neiye">
+            <h1>åä¿¡æºåæå¸ç­¾è¯¾æ¶ç³»ç»v1.0</h1>
+        </div>
+    </div>
+</header>
+<main id="main-wrap">
+	<div id="container" class="clearfix neiye">
+    	<div id="recordList-wrap" class="fl">
+        	<!--éé¡¹å¡åæ¢èå-->
+        	<div id="recordTitle">
+            	<nav>
+                	<ul class="clearfix">
+                    	<li class="active">å¾å®¡æ ¸</li>
+                        <li>å·²éè¿</li>
+                        <li>å·²å é¤</li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="recordList">
+            	<!--å¾å®¡æ ¸è¯¾æ¶-->
+            	<div class="check-wrap record-wrap">
+                    <div class="recordSelect clearfix">
+                        <div class="recordSelect-form fr">
+                            <form name="selectPage" method="post" action="">	
+                                <ul class="clearfix">
+                                    <li><div class="select-wrap">
+                                        <select name="selectPage-count">	
+                                           <option value="10">æ¯é¡µæ¾ç¤º10æ¡</option>  
+                                           <option value="20">æ¯é¡µæ¾ç¤º20æ¡</option>  
+                                           <option value="30">æ¯é¡µæ¾ç¤º30æ¡</option>  
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        for(var i=1;i<=12;i++){	
+                                          document.write(' <option value="'+(i<10?'0'+i:i)+'">'+(i<10?'0'+i:i)+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        var myDate=new Date();
+                                        var year=myDate.getFullYear();
+                                        for(var i=year;i>=2015;i--){	
+                                          document.write(' <option value="'+i+'">'+i+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="fr recordCount">
+                            7æå±25æ¡è®°å½ï¼é¢è®¡<span>180</span>è¯¾æ¶ï¼<span>2</span>æ¬¡å¼ç­
+                        </div>
+                    </div>
+                    <div class="recordList-table checkList">
+                        <table width="840" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <th scope="col">æ¥æ</th>
+                                  <th scope="col">ææ</th>
+                                  <th scope="col">æ¶é´æ®µ</th>
+                                  <th scope="col">ç­çº§</th>
+                                  <th scope="col">å°ç¹</th>
+                                  <th scope="col">èæ°</th>
+                                  <th scope="col">å¤æ³¨</th>
+                                  <th scope="col">æä½</th>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-1</td>
+                                  <td>æ¥</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td>å¨æ«ä¸è¯¾</td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-2</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>å¤§æ°æ®ç²¾åè¥é</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-3</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-4</td>
+                                  <td>ä¸</td>
+                                  <td>8:45-11:50</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>4</td>
+                                  <td>ä¸åè¯·å</td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-5</td>
+                                  <td>å</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-6</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-9</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>java1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-10</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td>å¼ç­</td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-11</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                                <tr>
+                                  <td>7-12</td>
+                                  <td>å</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                                  <td><a href="#" class="change">ä¿®æ¹</a> <a href="#" class="del">å é¤</a></td>
+                              </tr>
+                            </table>
+                        <div class="pagebar center">
+                            <a href="#"class="current">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                        </div>
+                    </div>
+                </div>
+                <!--éè¿è¯¾æ¶-->
+                <div class="pass-wrap record-wrap hide">
+                    <div class="recordSelect clearfix">
+                        <div class="recordSelect-form fr">
+                            <form name="selectPage" method="post" action="">	
+                                <ul class="clearfix">
+                                    <li><div class="select-wrap">
+                                        <select name="selectPage-count">	
+                                           <option value="10">æ¯é¡µæ¾ç¤º10æ¡</option>  
+                                           <option value="20">æ¯é¡µæ¾ç¤º20æ¡</option>  
+                                           <option value="30">æ¯é¡µæ¾ç¤º30æ¡</option>  
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        for(var i=1;i<=12;i++){	
+                                          document.write(' <option value="'+(i<10?'0'+i:i)+'">'+(i<10?'0'+i:i)+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        var myDate=new Date();
+                                        var year=myDate.getFullYear();
+                                        for(var i=year;i>=2015;i--){	
+                                          document.write(' <option value="'+i+'">'+i+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="fr recordCount">
+                            7æå±25æ¡è®°å½ï¼é¢è®¡<span>180</span>è¯¾æ¶ï¼<span>2</span>æ¬¡å¼ç­
+                        </div>
+                    </div>
+                    <div class="recordList-table checkList">
+                        <table width="840" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <th scope="col">æ¥æ</th>
+                                  <th scope="col">ææ</th>
+                                  <th scope="col">æ¶é´æ®µ</th>
+                                  <th scope="col">ç­çº§</th>
+                                  <th scope="col">å°ç¹</th>
+                                  <th scope="col">èæ°</th>
+                                  <th scope="col">å¤æ³¨</th>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-1</td>
+                                  <td>æ¥</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td>å¨æ«ä¸è¯¾</td>
+                              </tr>
+                                <tr>
+                                  <td>7-2</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>å¤§æ°æ®ç²¾åè¥é</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr>
+                                  <td>7-3</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-4</td>
+                                  <td>ä¸</td>
+                                  <td>8:45-11:50</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>4</td>
+                                  <td>ä¸åè¯·å</td>
+                              </tr>
+                                <tr>
+                                  <td>7-5</td>
+                                  <td>å</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr>
+                                  <td>7-6</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr>
+                                  <td>7-9</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>java1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-10</td>
+                                  <td>äº</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td>å¼ç­</td>
+                              </tr>
+                                <tr>
+                                  <td>7-11</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                                <tr>
+                                  <td>7-12</td>
+                                  <td>å</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                            </table>
+                        <div class="pagebar center">
+                            <a href="#"class="current">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                        </div>
+                    </div>
+                </div>
+                <!--å é¤è¯¾æ¶-->
+                <div class="deleted-wrap record-wrap hide">
+                    <div class="recordSelect clearfix">
+                        <div class="recordSelect-form fr">
+                            <form name="selectPage" method="post" action="">	
+                                <ul class="clearfix">
+                                    <li><div class="select-wrap">
+                                        <select name="selectPage-count">	
+                                           <option value="10">æ¯é¡µæ¾ç¤º10æ¡</option>  
+                                           <option value="20">æ¯é¡µæ¾ç¤º20æ¡</option>  
+                                           <option value="30">æ¯é¡µæ¾ç¤º30æ¡</option>  
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        for(var i=1;i<=12;i++){	
+                                          document.write(' <option value="'+(i<10?'0'+i:i)+'">'+(i<10?'0'+i:i)+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                    <li><div class="select-wrap">
+                                        <select name="selectMonth">
+                                        <script>
+                                        var myDate=new Date();
+                                        var year=myDate.getFullYear();
+                                        for(var i=year;i>=2015;i--){	
+                                          document.write(' <option value="'+i+'">'+i+'</option>') 
+                                        }
+                                           </script>
+                                        </select>
+                                    </div></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="fr recordCount">
+                            7æå±25æ¡è®°å½ï¼é¢è®¡<span>180</span>è¯¾æ¶ï¼<span>2</span>æ¬¡å¼ç­
+                        </div>
+                    </div>
+                    <div class="recordList-table checkList">
+                        <table width="840" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <th scope="col">æ¥æ</th>
+                                  <th scope="col">ææ</th>
+                                  <th scope="col">æ¶é´æ®µ</th>
+                                  <th scope="col">ç­çº§</th>
+                                  <th scope="col">å°ç¹</th>
+                                  <th scope="col">èæ°</th>
+                                  <th scope="col">å¤æ³¨</th>
+                              </tr>
+                                <tr class="beizhu">
+                                  <td>7-1</td>
+                                  <td>æ¥</td>
+                                  <td>å¨å¤©</td>
+                                  <td>UI1802</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td>å¨æ«ä¸è¯¾</td>
+                              </tr>
+                                <tr>
+                                  <td>7-2</td>
+                                  <td>ä¸</td>
+                                  <td>å¨å¤©</td>
+                                  <td>å¤§æ°æ®ç²¾åè¥é</td>
+                                  <td>708</td>
+                                  <td>8</td>
+                                  <td></td>
+                              </tr>
+                            </table>
+                        <div class="pagebar center">
+                            <a href="#"class="current">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ä¿®æ¹è¯¾æ¶-->
+            <div class="change-wrap record-bg hide">
+                    <div class="keshi-form changeRecord">
+                        <form name="changekeshi" method="post" action="">
+                    <table width="840" border="0" cellspacing="0" cellpadding="10">
+                <tr>
+                  <th>æ¥æ</th>
+                  <th>æ¶é´æ®µ</th>
+                  <th>ç­çº§</th>
+                  <th>å°ç¹</th>
+                  <th>èæ°</th>
+                  <th>å¤æ³¨</th>
+                </tr>
+                <tr>
+                  <td rowspan="2"><input type="text" id="select-date" name="select-date" class="auto-kal"  data-kal="mode:'multiple',format:'YYYY-MM-DD'" autocomplete="off"></td>
+                  <td>
+                  <div class="check">
+                  <input type="checkbox" id="allday" name="allday" value="allday"><label for="allday" id="allday-label"><span>å¨å¤©</span></label>
+                  </div>
+                  </td>
+                  <td rowspan="2">
+                  <div class="select-wrap">
+                  <select id="select-class" name="select-class">
+              	<optgroup label="æçç­çº§">
+                	<option value="UI1801">UI1801</option>
+                </optgroup>
+                <optgroup label="å¨é¨ç­çº§">
+                    <option value="UI1802">UI1802</option>
+                    <option value="UI1801">UI1801</option>
+                    <option value="åç«¯1802">åç«¯1802</option>
+                    <option value="å¤§æ°æ®ç²¾åè¥é1802">å¤§æ°æ®ç²¾åè¥é1802</option>
+                </optgroup>
+              </select>
+                  </div></td>
+                  <td rowspan="2">
+                  <div class="select-wrap">
+                  <select id="classroom" name="classroom">
+              	<optgroup label="æçæå®¤">
+                	<option>602</option>
+                </optgroup>
+                <optgroup label="å¨é¨æå®¤">
+                    <option>601</option>
+                    <option>602</option>
+                    <option>603</option>
+                    <option>604</option>
+                    <option>é¡¹ç®é¨äºé¨</option>
+                    <option>701</option>
+                    <option>702</option>
+                    <option>è½¯ä»¶å¼åäºé¨</option>
+                 </optgroup>
+              </select>
+                  </div>
+                  </td>
+                  <td rowspan="2">
+                  <div class="select-wrap">
+                  <select id="count" name="count">
+              	<optgroup label="æçè¯¾æ¶æ°">
+                	<option>8</option>
+                </optgroup>
+                <optgroup label="å¨é¨è¯¾æ¶æ°">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                </optgroup>
+              </select>
+                  </div></td>
+                  <td>
+                  <div class="check">
+                  <input type="checkbox" id="zhiban" name="zhiban" value="zhiban"><label for="zhiban"><span>å¼ç­</span></label>
+                  </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center">
+                  <div class="select-wrap">
+                  <select id="start-time" name="start-time">
+                    <option value="08:40">08:40</option>
+                    <option value="10:00">10:10</option>
+                    <option value="10:20">10:20</option>
+                    <option value="11:50">11:50</option>
+                  </select></div><span class="splite-time">å°</span><div class="select-wrap"><select id="end-time" name="end-time">
+                    <option value="13:40">13:40</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="18:00">18:00</option>
+                    <option value="20:00">20:00</option>
+                  </select></div></td>
+                  <td><label for="beizhu"><span class="sub-info">å¶ä»ä¿¡æ¯è¯·æ³¨æï¼</span></label><br><input type="text" id="beizhu" name="beizhu"></td>
+                </tr>
+              </table>
+              <div id="submit-wrap" class="center">
+                <input type="submit" value="ç¹å»ç¡®å®" class="btn-submit">
+              </div>
+                </form>
+                        </div>
+                </div>
+            <!--å é¤è¯¾æ¶-->
+            <div class="delete-wrap record-bg hide">
+                    <div class="deleteRecord center">
+                        <form name="delete" method="post"
+     action="">
+     						<p>ç¡®å®å é¤è¯¥è¯¾æ¶åï¼</p>
+                            <input type="submit" id="btn-delete" name="btn-delete" value="ç¡®å®">
+                            <input type="button" id="btn-cancel" value="åæ¶">
+     
+     </form>                
+                    </div>
+                </div>
+      	</div>
+        <aside class="fr">
+        	<div id="slidebar" class="fr">
+                <div id="teacher-info">
+                    <div id="touxiang">
+                        <a href="#"><img src="images/touxiang.jpg" alt="æå¸å¤´å"></a></div>
+                    <h1 class="center">èµµå²ç¨¹</h1>
+                </div>
+                <nav id="teacher-menu">
+                    <div id="menulist">
+                        <ul>
+                            <li><a href="teacher.jsp" >å®æ¶è¯¾æ¶ç­¾å°</a></li>
+                            <li><a href="recordList.jsp" class="active" >è¯¾æ¶ç­¾å°æ¥è¡¨</a></li>
+                            <li><a href="teacherInfo.jsp" >ä¸ªäººèµæè®¾ç½®</a></li>
+                            <li><a href="javascript:;">éåºè¯¾æ¶ç³»ç»</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+	</div>
+</main>
+<footer id="footer-wrap">
+	<div id="footer">
+    	<p>è¯¾æ¶ç³»ç»å¼å®¹IE9+ãè°·æ­ãç«çç­ç°ä»£æµè§å¨ï¼æµè§å¨çæ¬è¿ä½ä¼å½±åç¨æ·ä½éª</p>
+    	<p>Copyright @2018æé½åä¿¡æºåæéå¬å¸çæææ</p>
+        <p>è¯¾æ¶ç³»ç»å¼å®¹IE8+ï¼ä»¥åè°·æ­ãç«çç­ç°ä»£æµè§å¨</p>
+        <p>è®¾è®¡+åç«¯å¼åï¼èµµå²ç¨¹
+</p>
+	<p>åç«¯å¼åï¼æ±ªæ­¦æ</p>
+    </div>
+</footer>
+</body>
+</html>

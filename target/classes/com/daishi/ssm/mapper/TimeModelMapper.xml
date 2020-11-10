@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daishi.ssm.dao.TimeModelMapper">
+    <resultMap id="BaseResultMap" type="com.daishi.ssm.pojo.TimeModel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="createTime" property="createtime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, createTime
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_time
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!-- 无参查询所有时间 -->
+    <select id="selectAllTime" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_time ORDER BY id
+    </select>
+    <!-- 查询全部的时间字段 -->
+    <select id="selectTimeAll" resultMap="BaseResultMap" parameterType="hashmap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_time ORDER BY id limit #{currIndex} , #{m}
+    </select>
+    <!-- deleteTime根据时间字段，删除整列 -->
+    <delete id="deleteTime" parameterType="java.lang.String">
+        delete from t_time
+        where createtime = #{createtime,jdbcType=VARCHAR}
+    </delete>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_time
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <!-- 插入上课时间段 -->
+    <insert id="insert" parameterType="com.daishi.ssm.pojo.TimeModel">
+        <!-- dao插入方法中有int类型的返回值，故此该插入语句需要返回自增主键id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()<!-- 自增主键id返回 -->
+        </selectKey>
+        insert into t_time ( createTime)
+        values (#{createtime,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.daishi.ssm.pojo.TimeModel">
+        insert into t_time
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <!--修改时间 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.daishi.ssm.pojo.TimeModel">
+        update t_time
+        <set>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.daishi.ssm.pojo.TimeModel">
+        update t_time
+        set createTime = #{createtime,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

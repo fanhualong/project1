@@ -1,0 +1,29 @@
+package com.daishi.ssm.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.daishi.ssm.dao.ManagerModelMapper;
+import com.daishi.ssm.pojo.ManagerModel;
+import com.daishi.ssm.service.ManagerService;
+
+@Service
+public class ManagerServiceImpl implements ManagerService {
+	@Autowired
+	private ManagerModelMapper mapper;
+
+	@Override
+	public ManagerModel login(ManagerModel ml) {
+		ManagerModel m = mapper.selectfindByName(ml);
+
+		return m;
+	}
+
+	@Override
+	public void updataManagerPassword(ManagerModel manager) {
+		// TODO Auto-generated method stub
+		mapper.updateByPrimaryKey(manager);
+		
+	}
+
+}

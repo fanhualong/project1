@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.daishi.ssm.dao.Class_recordModelMapper">
+    <resultMap id="BaseResultMap" type="com.daishi.ssm.pojo.Class_recordModel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="rTime" property="rtime" jdbcType="VARCHAR"/>
+        <result column="beginTime" property="begintime" jdbcType="VARCHAR"/>
+        <result column="endTime" property="endtime" jdbcType="VARCHAR"/>
+        <result column="className" property="classname" jdbcType="VARCHAR"/>
+        <result column="roomName" property="roomname" jdbcType="VARCHAR"/>
+        <result column="sectionNumber" property="sectionnumber" jdbcType="INTEGER"/>
+        <result column="onDuty" property="onduty" jdbcType="INTEGER"/>
+        <result column="tName" property="tname" jdbcType="VARCHAR"/>
+        <result column="teacherId" property="teacherid" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="timeWeek" property="timeweek" jdbcType="VARCHAR"/>
+        <result column="year" property="year" jdbcType="INTEGER"/>
+        <result column="cMonth" property="cmonth" jdbcType="INTEGER"/>
+        <result column="day" property="day" jdbcType="INTEGER"/>
+        <result column="rType" property="rtype" jdbcType="INTEGER"/>
+        <result column="enable" property="enable" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, rTime, beginTime, endTime, className, roomName, sectionNumber, onDuty, tName,
+        teacherId, remark, createTime, timeWeek, year, cMonth, day, rType, enable
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from class_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectBycmonthAndyear" resultMap="BaseResultMap" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        select
+        <include refid="Base_Column_List"/>
+        from class_record
+        where year = #{year} and cMonth = #{cmonth}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from class_record
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from class_record
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        insert into class_record (id, rTime, beginTime,
+        endTime, className, roomName,
+        sectionNumber, onDuty, tName,
+        teacherId, remark, createTime,
+        timeWeek, year, cMonth,
+        day, rType, enable)
+        values (#{id,jdbcType=INTEGER}, #{rtime,jdbcType=VARCHAR}, #{begintime,jdbcType=VARCHAR},
+        #{endtime,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{roomname,jdbcType=VARCHAR},
+        #{sectionnumber,jdbcType=INTEGER}, #{onduty,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR},
+        #{teacherid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+        #{timeweek,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{cmonth,jdbcType=INTEGER},
+        #{day,jdbcType=INTEGER}, #{rtype,jdbcType=INTEGER}, #{enable,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        insert into class_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="rtime != null">
+                rTime,
+            </if>
+            <if test="begintime != null">
+                beginTime,
+            </if>
+            <if test="endtime != null">
+                endTime,
+            </if>
+            <if test="classname != null">
+                className,
+            </if>
+            <if test="roomname != null">
+                roomName,
+            </if>
+            <if test="sectionnumber != null">
+                sectionNumber,
+            </if>
+            <if test="onduty != null">
+                onDuty,
+            </if>
+            <if test="tname != null">
+                tName,
+            </if>
+            <if test="teacherid != null">
+                teacherId,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="timeweek != null">
+                timeWeek,
+            </if>
+            <if test="year != null">
+                year,
+            </if>
+            <if test="cmonth != null">
+                cMonth,
+            </if>
+            <if test="day != null">
+                day,
+            </if>
+            <if test="rtype != null">
+                rType,
+            </if>
+            <if test="enable != null">
+                enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="rtime != null">
+                #{rtime,jdbcType=VARCHAR},
+            </if>
+            <if test="begintime != null">
+                #{begintime,jdbcType=VARCHAR},
+            </if>
+            <if test="endtime != null">
+                #{endtime,jdbcType=VARCHAR},
+            </if>
+            <if test="classname != null">
+                #{classname,jdbcType=VARCHAR},
+            </if>
+            <if test="roomname != null">
+                #{roomname,jdbcType=VARCHAR},
+            </if>
+            <if test="sectionnumber != null">
+                #{sectionnumber,jdbcType=INTEGER},
+            </if>
+            <if test="onduty != null">
+                #{onduty,jdbcType=INTEGER},
+            </if>
+            <if test="tname != null">
+                #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherid != null">
+                #{teacherid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeweek != null">
+                #{timeweek,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                #{year,jdbcType=INTEGER},
+            </if>
+            <if test="cmonth != null">
+                #{cmonth,jdbcType=INTEGER},
+            </if>
+            <if test="day != null">
+                #{day,jdbcType=INTEGER},
+            </if>
+            <if test="rtype != null">
+                #{rtype,jdbcType=INTEGER},
+            </if>
+            <if test="enable != null">
+                #{enable,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        update class_record
+        <set>
+            <if test="rtime != null">
+                rTime = #{rtime,jdbcType=VARCHAR},
+            </if>
+            <if test="begintime != null">
+                beginTime = #{begintime,jdbcType=VARCHAR},
+            </if>
+            <if test="endtime != null">
+                endTime = #{endtime,jdbcType=VARCHAR},
+            </if>
+            <if test="classname != null">
+                className = #{classname,jdbcType=VARCHAR},
+            </if>
+            <if test="roomname != null">
+                roomName = #{roomname,jdbcType=VARCHAR},
+            </if>
+            <if test="sectionnumber != null">
+                sectionNumber = #{sectionnumber,jdbcType=INTEGER},
+            </if>
+            <if test="onduty != null">
+                onDuty = #{onduty,jdbcType=INTEGER},
+            </if>
+            <if test="tname != null">
+                tName = #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherid != null">
+                teacherId = #{teacherid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeweek != null">
+                timeWeek = #{timeweek,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                year = #{year,jdbcType=INTEGER},
+            </if>
+            <if test="cmonth != null">
+                cMonth = #{cmonth,jdbcType=INTEGER},
+            </if>
+            <if test="day != null">
+                day = #{day,jdbcType=INTEGER},
+            </if>
+            <if test="rtype != null">
+                rType = #{rtype,jdbcType=INTEGER},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        update class_record
+        set rTime = #{rtime,jdbcType=VARCHAR},
+        beginTime = #{begintime,jdbcType=VARCHAR},
+        endTime = #{endtime,jdbcType=VARCHAR},
+        className = #{classname,jdbcType=VARCHAR},
+        roomName = #{roomname,jdbcType=VARCHAR},
+        sectionNumber = #{sectionnumber,jdbcType=INTEGER},
+        onDuty = #{onduty,jdbcType=INTEGER},
+        tName = #{tname,jdbcType=VARCHAR},
+        teacherId = #{teacherid,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+        timeWeek = #{timeweek,jdbcType=VARCHAR},
+        year = #{year,jdbcType=INTEGER},
+        cMonth = #{cmonth,jdbcType=INTEGER},
+        day = #{day,jdbcType=INTEGER},
+        rType = #{rtype,jdbcType=INTEGER},
+        enable = #{enable,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <sql id="sql_1">
+        class_record where year=#{year} and cMonth=#{month} and tName=a.tName
+    </sql>
+    <sql id="sql_2">
+        class_record where year=#{year} and cMonth=#{month} and teacherId=#{tid}
+    </sql>
+    <!-- 查询课时细节 -->
+    <select id="getRecordDetail" resultMap="BaseResultMap" parameterType="Map">
+        select id,tName,cMonth,day,timeWeek,beginTime,endTime,className,roomName,sectionNumber,remark
+        from class_record WHERE teacherId=#{tid} and rType=#{rType} and cMonth=#{month} and year=#{year}
+        limit #{page},#{pageCount}
+        ;
+    </select>
+    <!-- 查询课时细节_页数 -->
+    <select id="getRecordDetail_page" resultType="int" parameterType="Map">
+        select count(*) from (select tName,cMonth,day,beginTime,endTime,className,roomName,sectionNumber,remark
+        from class_record WHERE teacherId=#{tid} and rType=#{rType} and cMonth=#{month} and year=#{year}) a
+        ;
+    </select>
+    <!-- 查询几月有多少条 -->
+    <select id="getCountData" parameterType="Map" resultType="com.daishi.ssm.pojo.Class_recordCount">
+        select count(sectionNumber) count,sum(sectionNumber) allHour,
+        (SELECT count(onDuty) FROM
+        <include refid="sql_2"/>
+        and onDuty=1) onDuty
+        from
+        <include refid="sql_2"/>
+        and rType in(1,2)
+    </select>
+    <!-- 查询所有课时-->
+    <select id="getSimpleTable" resultType="com.daishi.ssm.pojo.Class_record_resultMap" parameterType="Map">
+        select a.teacherId tId,a.tName tName,
+        (select sum(sectionNumber) from
+        <include refid="sql_1"/>
+        and rType in(1,2)) allHour,
+        (select sum(sectionNumber) from
+        <include refid="sql_1"/>
+        and rType=2) doneHour,
+        (select count(onDuty) FROM
+        <include refid="sql_1"/>
+        and onDuty=1) onDuty
+        from class_record a
+        group by a.teacherId
+        order by allHour desc,tId asc
+        LIMIT #{page},7;
+    </select>
+    <!-- 查询所有课时__页数 -->
+    <select id="getAllrecord_page" resultType="int" parameterType="Map">
+        select count(*) from (select a.teacherId tId,a.tName tName,
+        (select count(day) from<include refid="sql_1"/>)*6 allHour,
+        (select count(day) from
+        <include refid="sql_1"/>
+        and rType=1)*6 doneHour,
+        (select count(onDuty) FROM
+        <include refid="sql_1"/>
+        and onDuty=1) onDuty
+        from class_record a
+        group by a.teacherId) a
+    </select>
+    <!-- 执行课时通过 -->
+    <update id="updateRecord" parameterType="int">
+        update class_record set rType=2 where id=#{id};
+    </update>
+    <!-- 执行修改 -->
+    <update id="updateRecordDetail" parameterType="com.daishi.ssm.pojo.Class_recordModel">
+        update class_record
+        <set>
+            <if test="rtime != null">
+                rTime = #{rtime},
+            </if>
+            <if test="timeweek != null">
+                timeWeek = #{timeweek},
+            </if>
+
+            <if test="begintime != null">
+                beginTime = #{begintime},
+            </if>
+            <if test="endtime != null">
+                endTime = #{endtime},
+            </if>
+            <if test="classname != null">
+                className = #{classname},
+            </if>
+            <if test="roomname != null">
+                roomName = #{roomname},
+            </if>
+            <if test="sectionnumber != null">
+                sectionNumber = #{sectionnumber},
+            </if>
+            <if test="onduty != null">
+                onDuty = #{onduty},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 复原 -->
+    <update id="recall" parameterType="java.lang.Integer">
+        update class_record set
+        rType=1
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="deleteById" parameterType="java.lang.Integer">
+        update class_record set
+        rType=3
+        where id=#{id}
+    </update>
+</mapper>

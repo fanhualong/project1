@@ -1,0 +1,8 @@
+package com.daishi.ssm.service;
+
+import com.daishi.ssm.pojo.TeacherModel;
+
+public interface XieTeacherService {
+	public TeacherModel login(TeacherModel tl) ;
+	public void fileUpLoad(String name);
+}
